@@ -1,5 +1,20 @@
-use nalgebra::{Const, Vector};
+use nalgebra::{Const, Vector, Matrix};
 use num_dual::*;
+
+#[test]
+fn test_copy_dual_vecs() {
+    let v0 = DualVec::new(1., Derivative::new(Some(Matrix::from([1., 2., 3., ]))));
+    let v1 = v0;
+    let v2 = v0;
+
+    let v0 = DualVec::new(1., Derivative::new(Some(Matrix::from(vec![1., 2., 3., ]))));
+    let v1 = v0.clone();
+    let v2 = v0.clone();
+
+    let v0 = DualVec::new(1., Derivative::new(Some(Matrix::from(vec![1., 2., 3., ]))));
+    let v1 = v0;
+    let v2 = v0;
+}
 
 #[test]
 fn test_dual_vec_recip() {
