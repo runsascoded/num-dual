@@ -24,7 +24,13 @@ where
     f: PhantomData<F>,
 }
 
-impl<T: DualNum<F> + Copy, F: Copy, const N: usize> Copy for DualVec<T, F, Const<N>> {}
+impl<T: DualNum<F> + Copy, F: Copy, D: Dim> Copy for DualVec<T, F, D>
+where
+    DefaultAllocator: Allocator<T, D>,
+    <DefaultAllocator as Allocator<T, D>>::Buffer: Copy,
+{
+
+}
 
 pub type DualVec32<D> = DualVec<f32, f32, D>;
 pub type DualVec64<D> = DualVec<f64, f64, D>;

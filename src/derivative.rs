@@ -17,8 +17,11 @@ pub struct Derivative<T: DualNum<F>, F, R: Dim, C: Dim>(
 where
     DefaultAllocator: Allocator<T, R, C>;
 
-impl<T: DualNum<F> + Copy, F: Copy, const R: usize, const C: usize> Copy
-    for Derivative<T, F, Const<R>, Const<C>>
+impl<T: DualNum<F> + Copy, F: Copy, R: Dim, C: Dim> Copy
+    for Derivative<T, F, R, C>
+    where
+    DefaultAllocator: Allocator<T, R, C>,
+    <DefaultAllocator as Allocator<T, R, C>>::Buffer: Copy
 {
 }
 
